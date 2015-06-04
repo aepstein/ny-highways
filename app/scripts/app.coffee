@@ -15,16 +15,19 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.select'
   ]
   .config ($routeProvider) ->
     $routeProvider
       .when '/',
         templateUrl: 'views/main.html'
         controller: 'MainCtrl'
+      .when '/',
+        templateUrl: 'views/operation.html'
+        controller: 'OperationCtrl'
       .when '/about',
         templateUrl: 'views/about.html'
         controller: 'AboutCtrl'
       .otherwise
         redirectTo: '/'
-
