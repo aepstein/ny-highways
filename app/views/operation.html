@@ -14,9 +14,9 @@
       id="operationType">
       <ui-select-match placeholder="Select an operation type...">{{$select.selected.code}} - {{$select.selected.name}}</ui-select-match>
       <ui-select-choices repeat="operationType in operationTypes | propsFilter: {code: $select.search, name: $select.search}">
-        <span ng-bind-html="operationType.code | highlight: $select.search"/>
+        <span ng-bind-html="operationType.code | highlight: $select.search"></span>
         -
-        <span ng-bind-html="operationType.name | highlight: $select.search"/>
+        <span ng-bind-html="operationType.name | highlight: $select.search"></span>
       </ui-select-choices>
     </ui-select>
   </div>
