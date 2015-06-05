@@ -9,8 +9,11 @@
 ###
 angular.module 'nyHighwaysApp'
   .controller 'OperationCtrl', [ '$scope', '$geolocation', 'uiGmapGoogleMapApi',
-  ($scope,$geolocation,uiGmapGoogleMapApi) ->
+  '$filter',
+  ($scope,$geolocation,uiGmapGoogleMapApi,$filter) ->
     $scope.operation = { workers: [], equipmentUses: [], materialUses: [] }
+    unless $scope.operation.datePerformed
+      $scope.operation.datePerformed = new Date()
     $scope.map = {}
     $scope.operationTypes = [
       { code: '0111', name: 'Pothole Repair' }

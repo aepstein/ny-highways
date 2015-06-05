@@ -31,7 +31,7 @@ angular
       .when '/',
         templateUrl: 'views/main.html'
         controller: 'MainCtrl'
-      .when '/',
+      .when '/operation',
         templateUrl: 'views/operation.html'
         controller: 'OperationCtrl'
       .when '/about',
