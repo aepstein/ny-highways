@@ -19,4 +19,23 @@
       </ui-select-choices>
     </ui-select>
   </div>
+  <div class="form-group">
+    <label for="location">Location</label>
+    <input ng-disabled=true id=location class="form-control"
+      value="{{operation.location | flattenLocationFilter}}"/>
+    <!-- <div ng-show="map.center">
+      <ui-gmap-google-map center='map.center' zoom='map.zoom'/>
+    </div> -->
+  </div>
+  <tabset>
+    <tab heading="Personnel"><div ng-include="'views/_personnel.html'"/></tab>
+    <tab heading="Equipment"><div ng-include="'views/_equipment.html'"/></tab>
+    <tab heading="Material"><div ng-include="'views/_material.html'"/></tab>
+  </tabset>
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-primary">Save</button>
+      <button class="btn btn-danger">Cancel</button>
+    </div>
+  </div>
 </form>

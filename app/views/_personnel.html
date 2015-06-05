@@ -1,0 +1,37 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Employee</th>
+      <th>Hours Worked</th>
+      <th>
+        <button class="btn btn-default" ng-click="addWorker()">
+          <span class="glyphicon glyphicon-plus"/>
+          Add Worker
+        </button>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="worker in operation.workers">
+      <td>
+        <ui-select ng-model="operation.workers[$index].employee.selected" theme="bootstrap"
+          id="worker{{$index}}">
+          <ui-select-match placeholder="Select an employee...">{{$select.selected.identifier}} - {{$select.selected.name}}</ui-select-match>
+          <ui-select-choices repeat="employee in employees | propsFilter: {identifier: $select.search, name: $select.search}">
+            <div ng-bind-html="operation.identifier | highlight: $select.search"></div>
+            <div ng-bind-html="operation.name | highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+      </td>
+      <td>
+        <input ng-model="operation.workers[$index].hours"/>
+      </td>
+      <td>
+        <button class="btn btn-danger" ng-click="removeWorker($index)">
+          <span class="glyphicon glyphicon-remove"/>
+          Remove
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

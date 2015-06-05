@@ -29,6 +29,9 @@ module.exports = (config) ->
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
       'bower_components/angular-bootstrap-show-errors/src/showErrors.js'
       'bower_components/angular-ui-select/dist/select.js'
+      'bower_components/ngGeolocation/ngGeolocation.js'
+      'bower_components/lodash/dist/lodash.compat.js'
+      'bower_components/angular-google-maps/dist/angular-google-maps.js'
       'bower_components/angular-mocks/angular-mocks.js'
       # endbower
       # bower:coffee
