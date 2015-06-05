@@ -54,9 +54,9 @@
                 id="worker{{$index}}" autofocus="open">
                 <ui-select-match placeholder="Select an employee...">{{$select.selected.identifier}} - {{$select.selected.name}}</ui-select-match>
                 <ui-select-choices repeat="employee in employees | propsFilter: {identifier: $select.search, name: $select.search}">
-                  <span ng-bind-html="employee.identifier | highlight: $select.search"/>
+                  <span ng-bind-html="employee.identifier | highlight: $select.search"></span>
                   -
-                  <span ng-bind-html="employee.name | highlight: $select.search"/>
+                  <span ng-bind-html="employee.name | highlight: $select.search"></span>
                 </ui-select-choices>
               </ui-select>
             </td>
@@ -94,9 +94,9 @@
                 id="equipmentUse{{$index}}">
                 <ui-select-match placeholder="Select a piece of equipment...">{{$select.selected.identifier}} - {{$select.selected.name}}</ui-select-match>
                 <ui-select-choices repeat="equipmentItem in equipmentItems | propsFilter: {identifier: $select.search, name: $select.search}">
-                  <span ng-bind-html="equipmentItem.identifier | highlight: $select.search"/>
+                  <span ng-bind-html="equipmentItem.identifier | highlight: $select.search"></span>
                   -
-                  <span ng-bind-html="equipmentItem.name | highlight: $select.search"/>
+                  <span ng-bind-html="equipmentItem.name | highlight: $select.search"></span>
                 </ui-select-choices>
               </ui-select>
             </td>
@@ -135,9 +135,9 @@
                 id="equipmentUse{{$index}}">
                 <ui-select-match placeholder="Select a type of material...">{{$select.selected.code}} - {{$select.selected.name}}</ui-select-match>
                 <ui-select-choices repeat="material in materials | propsFilter: {code: $select.search, name: $select.search}">
-                  <span ng-bind-html="material.code | highlight: $select.search"/>
+                  <span ng-bind-html="material.code | highlight: $select.search"></span>
                   -
-                  <span ng-bind-html="material.name | highlight: $select.search"/>
+                  <span ng-bind-html="material.name | highlight: $select.search"></span>
                 </ui-select-choices>
               </ui-select>
             </td>
