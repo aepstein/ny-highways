@@ -11,9 +11,6 @@ angular.module 'nyHighwaysApp'
   .controller 'OperationCtrl', [ '$scope', '$geolocation', 'uiGmapGoogleMapApi',
   '$filter', '$http',
   ($scope,$geolocation,uiGmapGoogleMapApi,$filter,$http) ->
-    $scope.operation = { workers: [], equipmentUses: [], materialUses: [] }
-    unless $scope.operation.datePerformed
-      $scope.operation.datePerformed = new Date()
     $scope.map = {}
     $scope.operationTypes = [
       { code: '0111', name: 'Pothole Repair' }
@@ -60,6 +57,13 @@ angular.module 'nyHighwaysApp'
         promise = $http.get 'http://nominatim.openstreetmap.org/reverse',
           { params: params }
         promise.then success
+    $scope.operation = { workers: [], equipmentUses: [], materialUses: [] }
+    unless $scope.operation.datePerformed
+      $scope.operation.datePerformed = new Date()
+    for x in [1..4]
+      $scope.addWorker()
+      $scope.addMaterialUse() if x < 2
+      $scope.addEquipmentUse() if x < 2
     $geolocation.getCurrentPosition({timeout: 60000}).then (position) ->
       $scope.operation.location = position
       $scope.setRoadFromLocation()
