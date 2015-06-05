@@ -9,8 +9,8 @@
 ###
 angular.module 'nyHighwaysApp'
   .controller 'OperationCtrl', [ '$scope', '$geolocation', 'uiGmapGoogleMapApi',
-  '$filter',
-  ($scope,$geolocation,uiGmapGoogleMapApi,$filter) ->
+  '$filter', '$http',
+  ($scope,$geolocation,uiGmapGoogleMapApi,$filter,$http) ->
     $scope.operation = { workers: [], equipmentUses: [], materialUses: [] }
     unless $scope.operation.datePerformed
       $scope.operation.datePerformed = new Date()
@@ -47,7 +47,21 @@ angular.module 'nyHighwaysApp'
     $scope.removeMaterialUse = (i) ->
       $scope.operation.materialUses.splice i, 1
     # uiGmapGoogleMapApi.then (maps) ->
+    $scope.setRoadFromLocation = ->
+      success = ( response ) ->
+        $scope.operation.road = response.data.address.road
+      if $scope.operation.location && !$scope.operation.road
+        params =
+          limit: '1'
+          format: 'json'
+          zoom: '18'
+          lat: $scope.operation.location.coords.latitude
+          lon: $scope.operation.location.coords.longitude
+        promise = $http.get 'http://nominatim.openstreetmap.org/reverse',
+          { params: params }
+        promise.then success
     $geolocation.getCurrentPosition({timeout: 60000}).then (position) ->
       $scope.operation.location = position
+      $scope.setRoadFromLocation()
       $scope.map = { center: position.coords, zoom: 18 }
   ]

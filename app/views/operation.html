@@ -21,11 +21,15 @@
   </div>
   <div class="form-group">
     <label for="location">Location</label>
-    <input ng-disabled=true id=location class="form-control"
+    <input ng-disabled="true" id="location" class="form-control"
       value="{{operation.location | flattenLocationFilter}}"/>
     <!-- <div ng-show="map.center">
       <ui-gmap-google-map center='map.center' zoom='map.zoom'/>
     </div> -->
+  </div>
+  <div class="form-group">
+    <label for="road">Road</label>
+    <input ng-model="operation.road" id="road" class="form-control"/>
   </div>
   <tabset>
     <tab heading="Personnel">
