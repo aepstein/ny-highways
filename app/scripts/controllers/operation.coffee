@@ -54,7 +54,7 @@ angular.module 'nyHighwaysApp'
           zoom: '18'
           lat: $scope.operation.location.coords.latitude
           lon: $scope.operation.location.coords.longitude
-        promise = $http.get 'http://nominatim.openstreetmap.org/reverse',
+        promise = $http.get 'https://nominatim.openstreetmap.org/reverse',
           { params: params }
         promise.then success
     $scope.operation = { workers: [], equipmentUses: [], materialUses: [] }
