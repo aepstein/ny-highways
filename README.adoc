@@ -1,12 +1,121 @@
-# ny-highways
+== ny-highways
 
 This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
 version 0.11.1.
 
-## Build & development
+=== Architecture for NY Local Highway Department
+
+[[architecture]]
+.Architecture for Local Highway Department Information System
+[graphviz,arch,svg]
+----
+digraph G {
+  rankdir=LR
+  fontname="Arial-16:bold"
+  subgraph cluster_key {
+    label="Legend"
+    {
+      rank=source
+      node [ shape=plaintext, style=solid ]
+
+      k1 [ label="Info widely collected in similar forms" ]
+      k2 [ label="Info widely collected but wide variation in form" ]
+      k3 [ label="Info rarely collected" ]
+
+      k4 [ label="Question most can answer now" ]
+      k5 [ label="Question most have data to answer now, but lack analytics" ]
+      k6 [ label="Question few have data to answer now" ]
+    }
+    kc1 [ label="Bucket", fontcolor="#006600", shape=parallelogram ]
+    k1
+    kc2 [ label="Bucket", fontcolor="#666600", shape=parallelogram ]
+    k2
+    kc3 [ label="Bucket", fontcolor="#660000", shape=parallelogram ]
+    k3
+
+    kc4 [ label="Question", style=filled, color="#DDFFDD" ]
+    k4
+    kc5 [ label="Question", style=filled, color="#FFFFDD" ]
+    k5
+    kc6 [ label="Question", style=filled, color="#FFDDDD" ]
+    k6
+  }
+  subgraph cluster_0 {
+    label="Info Local Can Provide"
+    style=filled
+    color=lightgrey
+    node [ style=filled, color=white, fontname=Arial ]
+    daily [shape=parallelogram, label="Daily Report", fontcolor="#006600"]
+    survey [shape=parallelogram, label="Condition Report", fontcolor="#666600"]
+    maintenance [shape=parallelogram, label="Equipment Service Report", fontcolor="#006600"]
+    work_order [shape=parallelogram, label="Work Order", fontcolor="#006600"]
+    plan [shape=parallelogram, label="284 Agreements & Work Plans", fontcolor="#006600"]
+    avl [shape=parallelogram, label="Automatic Vehicle Location", fontcolor="#660000"]
+    gps [shape=parallelogram, label="GPS Asset Locations", fontcolor="#660000"]
+    traffic [shape=parallelogram, label="Traffic Counts", fontcolor="#660000"]
+  }
+  subgraph cluster_1 {
+    label="Info State Can Provide"
+    style=filled
+    color=lightgrey
+    node [ style=filled, color=white, fontname=Arial ]
+    waipr [shape=parallelogram, label="Weighted Average Item Price Report"]
+    fema [shape=parallelogram, label="NYS/FEMA Equipment Rental Rates"]
+    ris [shape=parallelogram, label="Road Information System"]
+    lhi [shape=parallelogram, label="Local Highway Inventory"]
+  }
+  subgraph cluster_2 {
+    label="Highway Performance Records Requiring Standardization"
+    style=filled
+    color="#FFFFAA"
+    node [ style=filled, color=white, fontname=Arial ]
+    cost [label="Functional Cost Accounting"]
+    history [label="Road Status and History"]
+    comparable [label="Shared Codes and Benchmarks"]
+    { daily maintenance avl } -> cost
+    { cost survey work_order gps traffic ris } -> history
+    { waipr fema } -> comparable
+    comparable -> cost
+    history -> lhi
+  }
+  subgraph cluster_3 {
+    label="Questions Highway Superintendents Want to Answer"
+    node [ style=filled, fontname=Arial ]
+    edge [ color="#888888" ]
+    employee_hours [color="#DDFFDD",label="How many hours did Jim work?"]
+    road_cost [color="#FFDDDD",label="How much money have I sunk into Sharon Drive over the last 10 years?"]
+    material_stocks [color="#DDFFDD",label="How much salt did I use last month?"]
+    private_comparison [color="#FFDDDD",label="How much more would it have cost if I let this job out to bid?"]
+    neighbor_comparison [color="#FFDDDD",label="What was the market rate last month on hot mix asphalt?"]
+    new_practice [color="#FFDDDD",label="Am I realizing any savings from applying crack seal to roads in that neighborhood?"]
+    equipment_use [color="#FFFFDD",label="How much have I used that piece of equipment?"]
+    road_priority [color="#FFFFDD",label="Which roads need to be rebuilt?"]
+    road_prevent [color="#FFFFDD",label="Which roads need to be maintained?"]
+    satisfaction [color="#FFFFDD",label="Are fewer people complaining about the roads this year?"]
+    liability [color="#FFFFDD",label="Did Jim hit Phil's mailbox on that plow run?"]
+    asset_location [color="#FFFFDD",label="Where are all the culverts that I have not inspected within the last month?"]
+    strategy_roads [color="#FFDDDD",label="How much is deferred maintenance costing us?"]
+    cost -> employee_hours
+    cost -> road_cost
+    { cost history } -> new_practice
+    cost -> material_stocks
+    { cost comparable } -> private_comparison
+    cost -> neighbor_comparison
+    cost -> equipment_use
+    history -> road_priority
+    history -> road_prevent
+    history -> satisfaction
+    { cost history } -> liability
+    history -> asset_location
+    { cost history } -> strategy_roads
+  }
+}
+----
+
+=== Build & development
 
 Run `grunt` for building and `grunt serve` for preview.
 
-## Testing
+=== Testing
 
 Running `grunt test` will run the unit tests with karma.
